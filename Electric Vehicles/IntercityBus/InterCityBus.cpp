@@ -47,3 +47,7 @@ void IntercityBus::display() const {
 	ElectricBus::display();
 	std::cout << "\t Break time: " << breakTime.hour << ":" << breakTime.minutes << " for " << breakMinutes << " minutes\n" << "\t Distance between cities: " << distance << std::endl;
 }
+
+double IntercityBus::calculateNeededBatteryForDistance() const {
+	return (distance * 100) / getBatteryRange(); 
+}

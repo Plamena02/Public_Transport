@@ -16,6 +16,6 @@ public:
 	Vehicle* clone() const override;
 
 	bool setBreak(size_t, size_t);
-
+	double calculateNeededBatteryForDistance() const;
 	void display() const override;
 };
