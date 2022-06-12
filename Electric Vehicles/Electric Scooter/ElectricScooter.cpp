@@ -4,7 +4,7 @@ ElectricScooter::ElectricScooter() : Vehicle() {
 	type = ElectricType::E_SCOOTER;
 }
 
-ElectricScooter::ElectricScooter(size_t DriverIdentityNumber, size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate) : Vehicle(DriverIdentityNumber, vehicleID, model, battery, batteryRange, chargingRate) {
+ElectricScooter::ElectricScooter(size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate) : Vehicle(0, vehicleID, model, battery, batteryRange, chargingRate) {
 	type = ElectricType::E_SCOOTER;
 }
 

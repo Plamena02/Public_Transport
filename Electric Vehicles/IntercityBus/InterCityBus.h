@@ -14,7 +14,7 @@ public:
 	ElectricType getType() const override;
 	Vehicle* clone() const override;
 
-	bool setBreak(size_t, size_t);
+	void setBreak(size_t, size_t);
 	double calculateNeededBatteryForDistance(const double) const;
 	void display() const override;
 };

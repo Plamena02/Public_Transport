@@ -1,4 +1,5 @@
 #include "ElectricBus.h"
+#include <stdexcept>
 
 ElectricBus::ElectricBus() : Vehicle() {
 	setTime(0, 0, 0, 0);
@@ -8,9 +9,8 @@ ElectricBus::ElectricBus(size_t DriverIdentityNumber, size_t vehicleID, MyString
 	Vehicle(DriverIdentityNumber, vehicleID, model, battery, batteryRange, chargingRate) {
 	listOfStops.pushBack(startDestination);
 	listOfStops.pushBack(finalDestination);
-	if (!setTime(sH, sM, fH, fM)) {
-		std::cout << "No, check your time entry!\n";
-	}
+	try{ setTime(sH, sM, fH, fM); }
+	catch(const std::invalid_argument &e){ throw e; }
 }
 
 void ElectricBus::display() const {
@@ -22,15 +22,12 @@ void ElectricBus::display() const {
 		<< "\n \t At: " << finalTime.hour << ":" << finalTime.minutes << "\n";
 }
 
-bool ElectricBus::setTime(size_t sHour, size_t sMin, size_t fHour, size_t fMin) {
-	if ((sHour < 24 && fHour < 24 && sMin <= 60 && fMin <= 60) && (sHour * 60 + sMin > fHour * 60 + fMin)) {
-		return false;
-	}
+void ElectricBus::setTime(size_t sHour, size_t sMin, size_t fHour, size_t fMin) {
+	if (!(sHour < 24 && fHour < 24 && sMin < 60 && fMin < 60 && sHour * 60 + sMin > fHour * 60 + fMin)) throw std::invalid_argument("Invalid time period");
 	startTime.hour = sHour;
 	startTime.minutes = sMin;
 	finalTime.hour = fHour;
 	finalTime.minutes = fMin;
-	return true;
 }
 
 bool ElectricBus::driveVehicle(const double km) {

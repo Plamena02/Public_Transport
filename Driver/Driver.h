@@ -6,12 +6,12 @@ class Driver {
 	MyString name;
 	size_t identityNumber;
 	size_t age;
-	enum class driverLicense {
+public:
+	enum driverLicense {
 		B,
 		D,
 		Unknown
 	}license;
-public:
 	Driver();
 	Driver(MyString, size_t, size_t , driverLicense);
 	void display() const;

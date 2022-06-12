@@ -14,8 +14,8 @@ public:
 	// Does the bus work at that time or it is at garage
 	virtual bool isItWorkingAt(Time&) const = 0;
 
-	bool setTime(size_t, size_t, size_t, size_t);
-	bool driveVehicle(const double) override; // km = how many km have you driven
+	void setTime(size_t, size_t, size_t, size_t);
+	bool driveVehicle(const double) override; 
 
 	void display() const override;
 };

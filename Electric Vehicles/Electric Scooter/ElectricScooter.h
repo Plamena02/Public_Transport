@@ -2,9 +2,11 @@
 #include "Vehicle.h"
 
 class ElectricScooter : public Vehicle {
+
+	bool isFree;
 public:
 	ElectricScooter();
-	ElectricScooter(size_t, size_t, MyString, double, double, double);
+	ElectricScooter(size_t, MyString, double, double, double);
 
 	bool driveVehicle(const double) override; // km = how many km have you driven
 

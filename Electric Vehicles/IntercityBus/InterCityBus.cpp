@@ -7,20 +7,18 @@ IntercityBus::IntercityBus() : ElectricBus() {
 
 IntercityBus::IntercityBus(size_t DriverIdentityNumber, size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate, MyString startDestination, MyString finalDestination, size_t sH, size_t sM, size_t fH, size_t fM, size_t bH, size_t bM) :
 	ElectricBus(DriverIdentityNumber, vehicleID, model, battery, batteryRange, chargingRate, startDestination, finalDestination, sH, sM, fH, fM) {
-	if (!setBreak(bH, bM)) {
-		std::cout << "No, check your time entry!\n";
-	}
+	try{ setBreak(bH, bM); }
+	catch(const std::invalid_argument &e){ throw e; }
 	type = Vehicle::ElectricType::E_INTERCITY_BUS;
 }
 
-bool IntercityBus::setBreak(size_t bH, size_t bM) {
+void IntercityBus::setBreak(size_t bH, size_t bM) {
 	if ((bH < 24 && bM <= 60) && (startTime.hour > bH || startTime.hour * 60 + startTime.minutes > bH * 60 + bM) &&
 		(finalTime.hour < bH || finalTime.hour * 60 + finalTime.minutes < bH * 60 + bM)) {
-		return false;
+		throw std::invalid_argument("Time period is wrong");
 	}
 	breakTime.hour = bM;
 	breakTime.minutes = bM;
-	return true;
 }
 
 bool IntercityBus::isItWorkingAt(Time& time) const {
