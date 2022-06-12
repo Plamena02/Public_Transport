@@ -3,11 +3,10 @@
 IntercityBus::IntercityBus() : ElectricBus() {
 	breakTime.hour = 0;
 	breakTime.minutes = 0;
-	distance = 0;
 }
 
-IntercityBus::IntercityBus(size_t DriverIdentityNumber, size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate, MyString startDestination, MyString finalDestination, size_t sH, size_t sM, size_t fH, size_t fM, size_t bH, size_t bM, size_t distance) :
-	ElectricBus(DriverIdentityNumber, vehicleID, model, battery, batteryRange, chargingRate, startDestination, finalDestination, sH, sM, fH, fM), distance(distance) {
+IntercityBus::IntercityBus(size_t DriverIdentityNumber, size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate, MyString startDestination, MyString finalDestination, size_t sH, size_t sM, size_t fH, size_t fM, size_t bH, size_t bM) :
+	ElectricBus(DriverIdentityNumber, vehicleID, model, battery, batteryRange, chargingRate, startDestination, finalDestination, sH, sM, fH, fM) {
 	if (!setBreak(bH, bM)) {
 		std::cout << "No, check your time entry!\n";
 	}
@@ -15,7 +14,8 @@ IntercityBus::IntercityBus(size_t DriverIdentityNumber, size_t vehicleID, MyStri
 }
 
 bool IntercityBus::setBreak(size_t bH, size_t bM) {
-	if (startTime.hour > bH || startTime.hour * 60 + startTime.minutes > bH * 60 + bM) {
+	if ((bH < 24 && bM <= 60) && (startTime.hour > bH || startTime.hour * 60 + startTime.minutes > bH * 60 + bM) &&
+		(finalTime.hour < bH || finalTime.hour * 60 + finalTime.minutes < bH * 60 + bM)) {
 		return false;
 	}
 	breakTime.hour = bM;
@@ -45,9 +45,13 @@ Vehicle* IntercityBus::clone() const {
 void IntercityBus::display() const {
 	std::cout << "Intercity bus'";
 	ElectricBus::display();
-	std::cout << "\t Break time: " << breakTime.hour << ":" << breakTime.minutes << " for " << breakMinutes << " minutes\n" << "\t Distance between cities: " << distance << std::endl;
+	std::cout << "\t Break time: " << breakTime.hour << ":" << breakTime.minutes << " for " << breakMinutes << " minutes\n";
 }
 
-double IntercityBus::calculateNeededBatteryForDistance() const {
-	return (distance * 100) / getBatteryRange(); 
+double IntercityBus::calculateNeededBatteryForDistance(const double distance) const {
+	double res = (distance * 100) / getBatteryRange();
+	if (res > 100) {
+		return -1; // If it is not possible for the battery to withstand the entire distance
+	}
+	return res; 
 }

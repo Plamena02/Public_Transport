@@ -1,10 +1,9 @@
 #pragma once
 #include "Vehicle.h"
-
+#include "vector.hpp"
 class ElectricBus : public Vehicle {
 protected:
-	MyString startDestination;
-	MyString finalDestination;
+	Vector<MyString> listOfStops;
 	struct Time
 	{
 		size_t hour, minutes;

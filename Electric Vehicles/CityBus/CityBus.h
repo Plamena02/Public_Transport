@@ -1,8 +1,6 @@
 #pragma once
 #include "ElectricBus.h"
-#include "vector.hpp"
 class CityBus : public ElectricBus {
-	Vector<MyString> listOfStops;
 public:
 	CityBus();
 	CityBus(size_t, size_t, MyString, double, double, double, MyString, MyString, size_t, size_t, size_t, size_t);

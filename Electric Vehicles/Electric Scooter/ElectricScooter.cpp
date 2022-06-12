@@ -11,6 +11,10 @@ ElectricScooter::ElectricScooter(size_t DriverIdentityNumber, size_t vehicleID, 
 bool ElectricScooter::driveVehicle(const double km) {
 	if (getBattery() <= 5)
 		return false;
+	double possibleDrivenDistance = (getBatteryRange() * getBattery()) / 100;
+	if (km > possibleDrivenDistance) {
+		return false;
+	}
 	double battery = ((getBatteryRange() - km) * 100) / getBatteryRange();
 	setBattery(battery);
 	return true;

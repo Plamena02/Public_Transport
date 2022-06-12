@@ -18,12 +18,9 @@ MyString Driver::getLicenseString() const {
 		return "B - Car";
 	if (license == driverLicense::D)
 		return "D - Bus";
-	if (license == driverLicense::DOESNT_HAVE)
-		return "This person doesn't have a driver license";
 	return  "Error";
 }
 
 void Driver::setLicense(driverLicense type){
 	license = type;
-
 }

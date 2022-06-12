@@ -27,7 +27,7 @@ public:
 	bool chargeBattery();
 	virtual bool driveVehicle(const double) = 0; // km = how many km have you driven
 	
-	void setBattery(const double);
+	bool setBattery(const double);
 	double getBattery() const;
 	double getBatteryRange() const;
 

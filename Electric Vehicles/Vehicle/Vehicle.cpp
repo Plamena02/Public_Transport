@@ -7,14 +7,13 @@ bool Vehicle::needCharging() const {
 	return true;
 }
 
-double Vehicle::getMinutesToCharge() const {
-	double kilometers = (batteryRange * battery) / 100;
-	double minutes = kilometers / chargingRate;
+double Vehicle::getMinutesToCharge() const { 
+	double kilometersDriven = batteryRange - (batteryRange * battery) / 100;
+	double minutes = kilometersDriven / chargingRate; //t = S/v  t-time; S-distance; v-charging rate (km per min)
 	return minutes;
 }
 bool Vehicle::chargeBattery() {
 	if (!needCharging()) {
-		// std::cout << "Battery is full!\n";
 		return false;
 	}
 	double minutes = getMinutesToCharge();
@@ -23,8 +22,12 @@ bool Vehicle::chargeBattery() {
 	return true;
 }
 
-void Vehicle::setBattery(const double battery) {
+bool Vehicle::setBattery(const double battery) {
+	if (battery > 100) {
+		return false;
+	}
 	this->battery = battery;
+	return true;
 }
 
 double Vehicle::getBattery() const {
@@ -40,8 +43,11 @@ Vehicle::Vehicle() : DriverIdentityNumber(0), vehicleID(0), model(""), battery(1
 }
 
 Vehicle::Vehicle(size_t DriverIdentityNumber,size_t vehicleID,MyString model, double battery, double batteryRange, double chargingRate) :
-	DriverIdentityNumber(DriverIdentityNumber), model(""), vehicleID(vehicleID), battery(battery), batteryRange(batteryRange), chargingRate(chargingRate) {
+	DriverIdentityNumber(DriverIdentityNumber), model(""), vehicleID(vehicleID), batteryRange(batteryRange), chargingRate(chargingRate) {
 	type = ElectricType::UNKNOWN;
+	if (!setBattery(battery)) {
+		std::cout << "No, check your entry for battery!\n";
+	}
 }
 
 void Vehicle::display() const {

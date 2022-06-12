@@ -12,6 +12,10 @@ ElectricCar::ElectricCar(size_t DriverIdentityNumber, size_t vehicleID, MyString
 bool ElectricCar::driveVehicle(const double km) {
 	if (getBattery() <= 10)
 		return false;
+	double possibleDrivenDistance = (getBatteryRange() * getBattery()) / 100;
+	if (km > possibleDrivenDistance) {
+		return false;
+	}
 	double battery = ((getBatteryRange() - km) * 100) / getBatteryRange();
 	setBattery(battery);
 	return true;

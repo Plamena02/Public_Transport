@@ -6,11 +6,9 @@ class Driver {
 	MyString name;
 	size_t identityNumber;
 	size_t age;
-	
 	enum class driverLicense {
 		B,
 		D,
-		DOESNT_HAVE,			//Can drive only electric scooter
 		Unknown
 	}license;
 public:
