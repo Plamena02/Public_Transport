@@ -1,5 +1,5 @@
 #pragma once
-#include "../ElectricBus/ElectricBus.h"
+#include "ElectricBus.h"
 class IntercityBus : public ElectricBus {
 
 public:
@@ -12,7 +12,7 @@ public:
 	ElectricType getType() const override;
 	Vehicle* clone() const override;
 
-	void setBreak(const MyString &);
+	MyString getBreakDestination() const;
 	double calculateNeededBatteryForDistance(const double) const;
 	void display() const override;
 

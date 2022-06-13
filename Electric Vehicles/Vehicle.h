@@ -1,5 +1,5 @@
 #pragma once
-#include "../../MyString/MyString.h"
+#include "../MyString/MyString.h"
 #include <iostream>
 
 using std::cout;

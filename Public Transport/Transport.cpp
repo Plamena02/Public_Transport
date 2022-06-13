@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Transport.h"
 #include "../MyString/MyString.h"
-#include "../Electric Vehicles/IntercityBus/InterCityBus.h"
-#include "../Electric Vehicles/Electric Car/ElectricCar.h"
-#include "../Electric Vehicles/Electric Scooter/ElectricScooter.h"
-#include "../Electric Vehicles/CityBus/CityBus.h"
+#include "../Electric Vehicles/InterCityBus.h"
+#include "../Electric Vehicles/ElectricCar.h"
+#include "../Electric Vehicles/ElectricScooter.h"
+#include "../Electric Vehicles/CityBus.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ void Transport::menu(){
 
     while(true){
 
-        cin.ignore();
+        cout << "Enter command\n> ";
         cin >> command;
 
         if(command == "exit") break;
@@ -40,20 +40,20 @@ void Transport::travel()
     
     if(inCity == "city")
     {
+        cout << "City transport\n";
         for(size_t i = 0; i < Transport::vehicles.getSize(); i++)
        {    
-            if (Transport::vehicles[i] -> getType() != Vehicle::E_INTERCITY_BUS)
-                if(Transport::vehicles[i] -> getType() == Vehicle::E_CITY_BUS && dynamic_cast<CityBus *>(Transport::vehicles[i]) -> rideFromTo(start, end) && Transport::vehicles[i]->driveVehicle(km))
-                {
-                    cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
-                    break;
-                }
-                else if(Transport::vehicles[i]->driveVehicle(km)){
+            if(Transport::vehicles[i] -> getType() == Vehicle::E_CITY_BUS && dynamic_cast<CityBus *>(Transport::vehicles[i]) -> rideFromTo(start, end) && Transport::vehicles[i]->driveVehicle(km))
+            {
+                cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
+                break;
+            }
+            if(Transport::vehicles[i] -> getType() != Vehicle::E_INTERCITY_BUS && Transport::vehicles[i]->driveVehicle(km)){
 
-                    cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
-                    break;
+                cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
+                break;
 
-                }
+            }
        }
     }
     else
@@ -72,11 +72,8 @@ void Transport::travel()
 }
 
 void Transport::print(){
-    // drivers or vehicle?
-    cin.ignore();
     for(size_t i = 0; i < Transport::vehicles.getSize(); i++)
        {    
-            cout << i + 1 << ". "; 
             Transport::vehicles[i] -> display();
             cout << endl;
        }
@@ -128,7 +125,7 @@ void Transport::add(){
         cin >> idDriver >> idVehicle >> model >> range >> rate >> seats;
         Transport::vehicles.pushBack(new ElectricCar(idDriver, idVehicle, seats, model, range, rate));
     }
-    else if(input == "scoter"){
+    else if(input == "scooter"){
 
         MyString model;
         size_t idVehicle;
@@ -138,8 +135,7 @@ void Transport::add(){
     }
     
 
-    cout << "Successfully created " << input << ")\n";
-    cin.ignore();
+    cout << "Successfully created " << input << ".\n";
     
 }
 
@@ -148,7 +144,6 @@ void Transport::remove(){
     size_t index;
 
     cin >> index;
-    cin.ignore();
 
     --index;
 
@@ -159,5 +154,23 @@ void Transport::remove(){
     }
 
     Transport::vehicles.popAt(index);
-    cout << "Erased a vehicle" << ")\n"; 
+    cout << "Erased a vehicle" << ".\n"; 
 }
+
+/*
+
+print
+add
+scooter
+12
+lime
+100
+5
+print
+travel
+city
+studentski
+fmi
+10
+
+*/

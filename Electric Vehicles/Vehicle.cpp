@@ -1,7 +1,7 @@
 #include "Vehicle.h"
 
 bool Vehicle::needCharging(const double distance) const {
-	return distance < battery * batteryRange / 100;
+	return distance > battery * batteryRange / 100;
 }
 
 void Vehicle::exhaustBattery(const double km){
@@ -46,6 +46,6 @@ Vehicle::Vehicle(size_t DriverIdentityNumber,size_t vehicleID, MyString model, d
 void Vehicle::display() const {
 	cout << " Id: " << vehicleID << "\n Model: " << model
 		<< "\n Battery at the moment: " << battery << "\n Battery range: " << batteryRange
-		<< "\n Chargint rate kilometer per minute: " << chargingRate << "\n";
+		<< "\n Charging rate kilometer per minute: " << chargingRate << "\n";
 }
 

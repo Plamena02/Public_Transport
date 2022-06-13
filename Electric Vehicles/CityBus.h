@@ -1,5 +1,5 @@
 #pragma once
-#include "../ElectricBus/ElectricBus.h"
+#include "ElectricBus.h"
 
 class CityBus : public ElectricBus {
 public:

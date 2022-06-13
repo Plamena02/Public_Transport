@@ -1,6 +1,6 @@
 #pragma once
-#include "../Vehicle/Vehicle.h"
-#include "../../vector/vector.hpp"
+#include "Vehicle.h"
+#include "../vector/vector.hpp"
 class ElectricBus : public Vehicle {
 protected:
 	Vector<MyString> listOfStops;

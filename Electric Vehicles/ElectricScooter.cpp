@@ -31,6 +31,6 @@ Vehicle* ElectricScooter::clone() const {
 }
 
 void ElectricScooter::display() const{
-	std::cout << "Scooter's";
+	std::cout << " Scooter's";
 	Vehicle::display();
 }

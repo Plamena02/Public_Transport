@@ -12,6 +12,12 @@ IntercityBus::IntercityBus(size_t DriverIdentityNumber, size_t vehicleID, MyStri
 	breakTime.minutes = bM;
 }
 
+bool IntercityBus::isItWorkingAt(size_t h, size_t m) const{
+
+	return startTime.hour * 60 + startTime.minutes < h * 60 + m && h * 60 + m < finalTime.hour * 60 + finalTime.minutes;
+
+}
+
 MyString IntercityBus::getTypeString() const {
 	return "Electric Intecrity Bus";
 }
@@ -34,3 +40,6 @@ double IntercityBus::calculateNeededBatteryForDistance(const double distance) co
 	double res = (distance * 100) / getBatteryRange();
 	return res > 100 ? -1 : res;
 }
+
+
+MyString IntercityBus::getBreakDestination() const{ return breakStop; }
