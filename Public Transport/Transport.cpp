@@ -80,6 +80,7 @@ void Transport::travel()
 void Transport::print(){
     for(size_t i = 0; i < Transport::vehicles.getSize(); i++)
        {    
+            cout << i + 1 ". ";
             Transport::vehicles[i] -> display();
             cout << endl;
        }
