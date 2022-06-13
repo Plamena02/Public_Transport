@@ -15,9 +15,9 @@ Container Transport::vehicles;
 void Transport::menu(){
 
     MyString command;
-
+    cout << "-> Welcome to Electric Public Transport. <-\n";
     while(true){
-        cout << "Welcome to Electric Public Transport. Please enter one of the following commands: \n 
+        cout << "Please enter one of the following commands: \n 
         travel, add, remove, print, exit\n";
         cout << "Enter command\n> ";
         cin >> command;
