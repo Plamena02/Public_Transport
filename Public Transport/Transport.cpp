@@ -35,13 +35,13 @@ void Transport::travel()
 {
     MyString inCity, start, end;
     double km;
-    cout << "If you want to travel in your city, enter - city\n If you want to get to another destination, enter - other:\n> "
+    cout << "If you want to travel in your city, enter - city\n If you want to get to another destination, enter - other:\n> ";
     cin >> inCity;
-    cout << "Please enter where you are traveling from:\n> "
+    cout << "Please enter where you are traveling from:\n> ";
     cin >> start;
-    cout >> "Please enter final destination:\n> "
+    cout >> "Please enter final destination:\n> ";
     cin >> end;
-    cout << "Enter the distance: \n> "
+    cout << "Enter the distance: \n> ";
     cin >> km;
     
     if(inCity == "city")
@@ -94,7 +94,7 @@ void Transport::add(){
     \n \t - bus - add an electric intercity bus;
     \n \t - cityBus - an electric city bus;
     \n \t - car - an electric taxi/car;
-    \n \t - scooter - an electric scooter;"
+    \n \t - scooter - an electric scooter;";
     cin >> input;
 
     if(input == "driverB"){
@@ -233,7 +233,7 @@ void Transport::add(){
 void Transport::remove(){
 
     size_t index;
-    cout << "Please enter the number of the vehicle: "
+    cout << "Please enter the number of the vehicle: ";
     cin >> index;
 
     --index;
