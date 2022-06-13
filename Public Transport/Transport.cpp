@@ -17,7 +17,8 @@ void Transport::menu(){
     MyString command;
 
     while(true){
-
+        cout << "Welcome to Electric Public Transport. Please enter one of the following commands: \n 
+        travel, add, remove, print, exit\n";
         cout << "Enter command\n> ";
         cin >> command;
 
@@ -34,8 +35,13 @@ void Transport::travel()
 {
     MyString inCity, start, end;
     double km;
+    cout << "If you want to travel in your city, enter - city\n If you want to get to another destination, enter - other:\n> "
     cin >> inCity;
-    cin >> start >> end;
+    cout << "Please enter where you are traveling from:\n> "
+    cin >> start;
+    cout >> "Please enter final destination:\n> "
+    cin >> end;
+    cout << "Enter the distance: \n> "
     cin >> km;
     
     if(inCity == "city")
@@ -82,7 +88,12 @@ void Transport::print(){
 void Transport::add(){
 
     MyString input;
-
+    cout << "Possible commands:\n \t - driverB - a driver for an electric car;
+    \n \t - driverD - a driver for an electric bus;
+    \n \t - bus - add an electric intercity bus;
+    \n \t - cityBus - an electric city bus;
+    \n \t - car - an electric taxi/car;
+    \n \t - scooter - an electric scooter;"
     cin >> input;
 
     if(input == "driverB"){
@@ -90,7 +101,12 @@ void Transport::add(){
         MyString name;
 
         size_t id, age;
-        cin >> name >> id >> age;
+        cout << "\t Name: ";
+        cin >> name;
+        cout << "\t Id: "; 
+        cin >> id;
+        cout << "\t Age: ";
+        cin >> age;
         Transport::drivers.pushBack(Driver(name, id, age, Driver::B));
     }
     else if(input == "driverD"){
@@ -98,7 +114,12 @@ void Transport::add(){
         MyString name;
 
         size_t id, age;
-        cin >> name >> id >> age;
+        cout << "\t Name: ";
+        cin >> name;
+        cout << "\t Id: "; 
+        cin >> id;
+        cout << "\t Age: ";
+        cin >> age;
         Transport::drivers.pushBack(Driver(name, id, age, Driver::D));
     }
     else if(input == "bus"){
@@ -106,7 +127,36 @@ void Transport::add(){
         MyString model, start, end, breakStop;
         size_t idDriver, idVehicle, sH, sM, fH, fM, bH, bM, breakMinutes;
         double range, rate;
-        cin >> idDriver >> idVehicle >> model >> range >> rate >> start >> end >> sH >> sM >> fH >> fM >> bH >> bM >> breakMinutes >> breakStop;
+        cout << "Id of the driver: ";
+        cin >> idDriver;
+        cout << "Registration number of the vehicle: ";
+        cin >> idVehicle;
+        cout << "Model of the bus: ";
+        cin >> model;
+        cout << "Possible battery range: ";
+        cin >> range;
+        cout << "Charging rate (ex. 1.5 (km per min)): ";
+        cin >> rate;
+        cout << "First destination: ";
+        cin >> start;
+        cout << "Last destination: ";
+        cin >> end;
+        cout << "Starting hour: ";
+        cin >> sH;
+        cout << "Starting minutes: ";
+        cin >> sM;
+        cout << "Final arrival hour: ";
+        cin >> fH;
+        cout << "Final Arrival minutes: ";
+        cin >> fM;
+        cout << "Break time hour: ";
+        cin >> bH;
+        cout << "Break time minutes: ";
+        cin >> bM;
+        cout << "How long will be the break: ";
+        cin >> breakMinutes;
+        cout << "Break stop destination: ";
+        cin >> breakStop;
         Transport::vehicles.pushBack(new IntercityBus(idDriver, idVehicle, model, range, rate, start, end, sH, sM, fH, fM, bH, bM, breakMinutes, breakStop));
     }
     else if(input == "cityBus"){
@@ -114,7 +164,30 @@ void Transport::add(){
         MyString model, start, end;
         size_t idDriver, idVehicle, sH, sM, fH, fM, capacity;
         double range, rate;
-        cin >> idDriver >> idVehicle >> model >> range >> rate >> start >> end >> sH >> sM >> fH >> fM >> capacity;
+        cout << "Id of the driver: ";
+        cin >> idDriver;
+        cout << "Registration number of the vehicle: ";
+        cin >> idVehicle;
+        cout << "Model of the bus: ";
+        cin >> model;
+        cout << "Possible battery range: ";
+        cin >> range;
+        cout << "Charging rate (ex. 1.5 (km per min)): ";
+        cin >> rate;
+        cout << "First destination: ";
+        cin >> start;
+        cout << "Last destination: ";
+        cin >> end;
+        cout << "Starting hour: ";
+        cin >> sH;
+        cout << "Starting minutes: ";
+        cin >> sM;
+        cout << "Final arrival hour: ";
+        cin >> fH;
+        cout << "Final Arrival minutes: ";
+        cin >> fM;
+        cout << "The Capacity of the Battery: ";
+        cin >> capacity;
         Transport::vehicles.pushBack(new CityBus(idDriver, idVehicle, model, range, rate, start, end, sH, sM, fH, fM, capacity));
     }
     else if(input == "car"){
@@ -122,7 +195,18 @@ void Transport::add(){
         MyString model;
         size_t idDriver, idVehicle, seats;
         double range, rate;
-        cin >> idDriver >> idVehicle >> model >> range >> rate >> seats;
+        cout << "Id of the driver: ";
+        cin >> idDriver;
+        cout << "Registration number of the vehicle: ";
+        cin >> idVehicle;
+        cout << "Model of the bus: ";
+        cin >> model;
+        cout << "Possible battery range: ";
+        cin >> range;
+        cout << "Charging rate (ex. 1.5 (km per min)): ";
+        cin >> rate;
+        cout << "How many seats will be there: ";
+        cin >> seats;
         Transport::vehicles.pushBack(new ElectricCar(idDriver, idVehicle, seats, model, range, rate));
     }
     else if(input == "scooter"){
@@ -130,7 +214,13 @@ void Transport::add(){
         MyString model;
         size_t idVehicle;
         double range, rate;
-        cin >> idVehicle >> model >> range >> rate;
+        cin >> idVehicle;
+        cout << "Model of the bus: ";
+        cin >> model;
+        cout << "Possible battery range: ";
+        cin >> range;
+        cout << "Charging rate (ex. 1.5 (km per min)): ";
+        cin >> rate;
         Transport::vehicles.pushBack(new ElectricScooter(idVehicle, model, range, rate));
     }
     
@@ -142,7 +232,7 @@ void Transport::add(){
 void Transport::remove(){
 
     size_t index;
-
+    cout << "Please enter the number of the vehicle: "
     cin >> index;
 
     --index;
