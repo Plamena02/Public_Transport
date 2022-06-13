@@ -1,33 +1,29 @@
 #include "Vehicle.h"
 
-bool Vehicle::needCharging() const {
-	if (battery >= 100) {
-		return false;
-	}
-	return true;
+bool Vehicle::needCharging(const double distance) const {
+	return distance < battery * batteryRange / 100;
 }
 
-double Vehicle::getMinutesToCharge() const { 
-	double kilometersDriven = batteryRange - (batteryRange * battery) / 100;
-	double minutes = kilometersDriven / chargingRate; //t = S/v  t-time; S-distance; v-charging rate (km per min)
-	return minutes;
+void Vehicle::exhaustBattery(const double km){
+	this -> battery = ((batteryRange - km) * 100) / batteryRange;
 }
-bool Vehicle::chargeBattery() {
-	if (!needCharging()) {
-		return false;
-	}
-	double minutes = getMinutesToCharge();
-	std::cout << "Battery charged! It took" << minutes << " minutes. \n";
+
+double Vehicle::getMinutesToCharge() const {
+	return (batteryRange - (batteryRange * battery) / 100) / chargingRate; //t = S/v  t-time; S-distance; v-charging rate (km per min)
+}
+void Vehicle::chargeBattery(){
+	cout << "Battery charged! It took" << getMinutesToCharge() << " minutes. \n";
 	battery = 100;
-	return true;
 }
 
-bool Vehicle::setBattery(const double battery) {
-	if (battery > 100) {
-		return false;
-	}
-	this->battery = battery;
-	return true;
+void Vehicle::setBattery(const double battery) {
+	if (battery > 100) return;
+	this -> battery = battery;
+}
+
+size_t Vehicle::getVehicleId() const
+{
+	return vehicleID;   
 }
 
 double Vehicle::getBattery() const {
@@ -42,16 +38,13 @@ Vehicle::Vehicle() : DriverIdentityNumber(0), vehicleID(0), model(""), battery(1
 	type = ElectricType::UNKNOWN;
 }
 
-Vehicle::Vehicle(size_t DriverIdentityNumber,size_t vehicleID,MyString model, double battery, double batteryRange, double chargingRate) :
-	DriverIdentityNumber(DriverIdentityNumber), model(""), vehicleID(vehicleID), batteryRange(batteryRange), chargingRate(chargingRate) {
+Vehicle::Vehicle(size_t DriverIdentityNumber,size_t vehicleID, MyString model, double batteryRange, double chargingRate) :
+	DriverIdentityNumber(DriverIdentityNumber), model(""), vehicleID(vehicleID), battery(100), batteryRange(batteryRange), chargingRate(chargingRate) {
 	type = ElectricType::UNKNOWN;
-	if (!setBattery(battery)) {
-		std::cout << "No, check your entry for battery!\n";
-	}
 }
 
 void Vehicle::display() const {
-	std::cout << " Id: " << vehicleID << "\n Model: " << model
+	cout << " Id: " << vehicleID << "\n Model: " << model
 		<< "\n Battery at the moment: " << battery << "\n Battery range: " << batteryRange
 		<< "\n Chargint rate kilometer per minute: " << chargingRate << "\n";
 }

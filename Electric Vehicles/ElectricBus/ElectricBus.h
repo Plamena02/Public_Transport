@@ -1,20 +1,22 @@
 #pragma once
-#include "Vehicle.h"
-#include "vector.hpp"
+#include "../Vehicle/Vehicle.h"
+#include "../../vector/vector.hpp"
 class ElectricBus : public Vehicle {
 protected:
 	Vector<MyString> listOfStops;
 	struct Time
 	{
 		size_t hour, minutes;
-	} startTime, finalTime;
+	} startTime, finalTime, breakTime;
 public:
 	ElectricBus();
-	ElectricBus(size_t, size_t, MyString, double, double, double, MyString, MyString, size_t, size_t, size_t, size_t);
-	// Does the bus work at that time or it is at garage
-	virtual bool isItWorkingAt(Time&) const = 0;
+	ElectricBus(size_t, size_t, MyString, double, double, MyString, MyString, size_t, size_t, size_t, size_t);
+	virtual bool isItWorkingAt(size_t, size_t) const = 0;
 
 	void setTime(size_t, size_t, size_t, size_t);
+    void addStop(const MyString &);
+	bool rideFromTo(const MyString&, const MyString&);
+    bool removeStop(const MyString &);
 	bool driveVehicle(const double) override; 
 
 	void display() const override;

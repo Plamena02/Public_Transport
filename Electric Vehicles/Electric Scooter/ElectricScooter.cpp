@@ -4,19 +4,17 @@ ElectricScooter::ElectricScooter() : Vehicle() {
 	type = ElectricType::E_SCOOTER;
 }
 
-ElectricScooter::ElectricScooter(size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate) : Vehicle(0, vehicleID, model, battery, batteryRange, chargingRate) {
+ElectricScooter::ElectricScooter(size_t vehicleID, MyString model, double batteryRange, double chargingRate) : Vehicle(0, vehicleID, model, batteryRange, chargingRate) {
 	type = ElectricType::E_SCOOTER;
 }
 
+void ElectricScooter::occupy(){ isFree = false; }
+void ElectricScooter::free(){ isFree = true; }
+bool ElectricScooter::isOccupied() const{ return isFree; }
+
 bool ElectricScooter::driveVehicle(const double km) {
-	if (getBattery() <= 5)
-		return false;
-	double possibleDrivenDistance = (getBatteryRange() * getBattery()) / 100;
-	if (km > possibleDrivenDistance) {
-		return false;
-	}
-	double battery = ((getBatteryRange() - km) * 100) / getBatteryRange();
-	setBattery(battery);
+	if (getBattery() <= 5 || needCharging(km)) return false;
+	exhaustBattery(km);
 	return true;
 }
 

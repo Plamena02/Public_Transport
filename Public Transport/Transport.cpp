@@ -1,11 +1,10 @@
 #include <iostream>
 #include "Transport.h"
-#include "MyString/MyString.h"
-#include "Electric Vehicles/IntercityBus/IntercityBus.h"
-#include "Electric Vehicles/Electric Car/ElectricCar.h"
-#include "Electric Vehicles/ElectricBus/ElectricBus.h"
-#include "Electric Vehicles/Electric Scooter/ElectricScooter.h"
-#include "Electric Vehicles/CityBus/CityBus.h"
+#include "../MyString/MyString.h"
+#include "../Electric Vehicles/IntercityBus/InterCityBus.h"
+#include "../Electric Vehicles/Electric Car/ElectricCar.h"
+#include "../Electric Vehicles/Electric Scooter/ElectricScooter.h"
+#include "../Electric Vehicles/CityBus/CityBus.h"
 
 using namespace std;
 
@@ -33,40 +32,43 @@ void Transport::menu(){
 
 void Transport::travel()
 {
-    MyString input;
-    cin >> input;
-    /*
-    if(input == "city")
+    MyString inCity, start, end;
+    double km;
+    cin >> inCity;
+    cin >> start >> end;
+    cin >> km;
+    
+    if(inCity == "city")
     {
-        size_t h, m;
         for(size_t i = 0; i < Transport::vehicles.getSize(); i++)
        {    
-            if (Transport::vehicles[i])
-            {
-                
-            }
-            
-            Transport::vehicles[i] -> display();
-            cout << endl;
+            if (Transport::vehicles[i] -> getType() != Vehicle::E_INTERCITY_BUS)
+                if(Transport::vehicles[i] -> getType() == Vehicle::E_CITY_BUS && dynamic_cast<CityBus *>(Transport::vehicles[i]) -> rideFromTo(start, end) && Transport::vehicles[i]->driveVehicle(km))
+                {
+                    cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
+                    break;
+                }
+                else if(Transport::vehicles[i]->driveVehicle(km)){
+
+                    cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
+                    break;
+
+                }
        }
     }
     else
     {
-        MyString end;
-        cin >> end;
         for(size_t i = 0; i < Transport::vehicles.getSize(); i++)
         {    
-            if (Transport::vehicles[i].)
+            if (Transport::vehicles[i]->getType() == Vehicle::E_INTERCITY_BUS && dynamic_cast<IntercityBus *>(Transport::vehicles[i])->rideFromTo(start, end) && Transport::vehicles[i]->driveVehicle(km))
             {
-                
+                cout << "You can take " << Transport::vehicles[i]->getTypeString() << '\n';
+                break;
             }
-            
-            Transport::vehicles[i] -> display();
-            cout << endl;
        }
        
-    }   TO DO
-    */ 
+    }  
+     
 }
 
 void Transport::print(){
@@ -104,35 +106,35 @@ void Transport::add(){
     }
     else if(input == "bus"){
 
-        MyString model, start, end;
-        size_t idDriver, idVehicle, sH, sM, fH, fM, bH, bM;
-        double battery, range, rate;
-        cin >> idDriver >> idVehicle >> model >> battery >> range >> rate >> start >> end >> sH >> sM >> fH >> fM >> bH >> bM;
-        Transport::vehicles.pushBack(new IntercityBus(idDriver, idVehicle, model, battery, range, rate, start, end, sH, sM, fH, fM, bH, bM));
+        MyString model, start, end, breakStop;
+        size_t idDriver, idVehicle, sH, sM, fH, fM, bH, bM, breakMinutes;
+        double range, rate;
+        cin >> idDriver >> idVehicle >> model >> range >> rate >> start >> end >> sH >> sM >> fH >> fM >> bH >> bM >> breakMinutes >> breakStop;
+        Transport::vehicles.pushBack(new IntercityBus(idDriver, idVehicle, model, range, rate, start, end, sH, sM, fH, fM, bH, bM, breakMinutes, breakStop));
     }
     else if(input == "cityBus"){
 
         MyString model, start, end;
-        size_t idDriver, idVehicle, sH, sM, fH, fM, bH, bM;
-        double battery, range, rate;
-        cin >> idDriver >> idVehicle >> model >> battery >> range >> rate >> start >> end >> sH >> sM >> fH >> fM;
-        Transport::vehicles.pushBack(new CityBus(idDriver, idVehicle, model, battery, range, rate, start, end, sH, sM, fH, fM));
+        size_t idDriver, idVehicle, sH, sM, fH, fM, capacity;
+        double range, rate;
+        cin >> idDriver >> idVehicle >> model >> range >> rate >> start >> end >> sH >> sM >> fH >> fM >> capacity;
+        Transport::vehicles.pushBack(new CityBus(idDriver, idVehicle, model, range, rate, start, end, sH, sM, fH, fM, capacity));
     }
     else if(input == "car"){
 
         MyString model;
         size_t idDriver, idVehicle, seats;
-        double battery, range, rate;
-        cin >> idDriver >> idVehicle >> model >> battery >> range >> rate;
-        Transport::vehicles.pushBack(new ElectricCar(idDriver, idVehicle, model, battery, range, rate, seats));
+        double range, rate;
+        cin >> idDriver >> idVehicle >> model >> range >> rate >> seats;
+        Transport::vehicles.pushBack(new ElectricCar(idDriver, idVehicle, seats, model, range, rate));
     }
     else if(input == "scoter"){
 
         MyString model;
         size_t idVehicle;
-        double battery, range, rate;
-        cin >> idVehicle >> model >> battery >> range >> rate;
-        Transport::vehicles.pushBack(new ElectricScooter(idVehicle, model, battery, range, rate));
+        double range, rate;
+        cin >> idVehicle >> model >> range >> rate;
+        Transport::vehicles.pushBack(new ElectricScooter(idVehicle, model, range, rate));
     }
     
 

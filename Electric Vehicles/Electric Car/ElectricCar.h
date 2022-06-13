@@ -1,25 +1,22 @@
 #pragma once
-#include "Vehicle.h"
+#include "../Vehicle/Vehicle.h"
 
 class ElectricCar : public Vehicle { //Electric Taxi car
 
 	public:
 		ElectricCar();
-		ElectricCar(size_t, size_t, MyString, double, double, double, size_t);
+		ElectricCar(size_t, size_t, size_t, MyString, double, double);
+
+		size_t getSpeed() const;
+
+		void display() const override;
 
 		bool driveVehicle(const double) override; 
-
 		MyString getTypeString() const override;
 		ElectricType getType() const override;
 		Vehicle* clone() const override;
-		void occupy();
-		void free();
-		bool isOccupied() const;
 
-		void display() const override;
-	
 	private:
-		size_t numberOfSeats;
-		bool isFree;
+		size_t speed;
 
 };

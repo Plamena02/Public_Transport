@@ -1,20 +1,19 @@
 #include "ElectricCar.h"
 
-ElectricCar::ElectricCar() : Vehicle(), numberOfSeats(4) {
+ElectricCar::ElectricCar() : Vehicle() {
 	type = ElectricType::E_CAR;
 }
 
-ElectricCar::ElectricCar(size_t DriverIdentityNumber, size_t vehicleID, MyString model, double battery, double batteryRange, double chargingRate, size_t numberOfSeats) :
-	Vehicle(DriverIdentityNumber, vehicleID, model, battery, batteryRange, chargingRate), numberOfSeats(numberOfSeats){
+ElectricCar::ElectricCar(size_t DriverIdentityNumber, size_t vehicleID, size_t speed, MyString model, double batteryRange, double chargingRate) :
+	Vehicle(DriverIdentityNumber, vehicleID, model, batteryRange, chargingRate), speed(speed){
 	type = ElectricType::E_CAR;
 }
+
+size_t ElectricCar::getSpeed() const{ return speed; }
 
 bool ElectricCar::driveVehicle(const double km) {
-	if (getBattery() <= 10) return false;
-	double possibleDrivenDistance = (getBatteryRange() * getBattery()) / 100;
-	if (km > possibleDrivenDistance) return false;
-	double battery = ((getBatteryRange() - km) * 100) / getBatteryRange();
-	setBattery(battery);
+	if (getBattery() <= 10 || needCharging(km)) return false;
+	exhaustBattery(km);
 	return true;
 }
 
@@ -33,9 +32,4 @@ Vehicle* ElectricCar::clone() const {
 void ElectricCar::display() const {
 	std::cout << "Electric Taxi car's";
 	Vehicle::display();
-	std::cout << "Number of seats " << numberOfSeats << '\n';
 }
-
-void ElectricCar::occupy(){ isFree = false; }
-void ElectricCar::free(){ isFree = true; }
-bool ElectricCar::isOccupied() const{ return isFree; }

@@ -1,39 +1,44 @@
 #pragma once
-#include "MyString.h"
+#include "../../MyString/MyString.h"
 #include <iostream>
+
+using std::cout;
 
 class Vehicle {
 	size_t DriverIdentityNumber;
 	size_t vehicleID;
 	MyString model;
-	double battery; //%
-	double batteryRange; //kilometers
-	double chargingRate; //1.5 km per min
-protected:
-	enum class ElectricType{
+	double battery;
+	double batteryRange;
+	double chargingRate;
+public:
+	enum ElectricType{
 		E_SCOOTER,
 		E_CAR,
 		E_CITY_BUS,
 		E_INTERCITY_BUS,
 		UNKNOWN
 	}type;
-public:
+
 	Vehicle();
-	Vehicle(size_t, size_t, MyString, double, double, double);
+	Vehicle(size_t, size_t, MyString, double, double);
 	virtual ~Vehicle() {};
 
-	bool needCharging() const;
+	bool needCharging(const double) const;
+	void exhaustBattery(const double);
 	double getMinutesToCharge() const;
-	bool chargeBattery();
-	virtual bool driveVehicle(const double) = 0; // km = how many km have you driven
-	
-	bool setBattery(const double);
+	void chargeBattery();
+
+	void setBattery(const double);
+	size_t getVehicleId() const;
 	double getBattery() const;
 	double getBatteryRange() const;
 
+	virtual void display() const;
+
+	virtual bool driveVehicle(const double) = 0;
 	virtual MyString getTypeString() const = 0;
 	virtual ElectricType getType() const = 0;
 	virtual Vehicle* clone() const = 0;
 
-	virtual void display() const;
 };

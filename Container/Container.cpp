@@ -104,7 +104,7 @@ void Container::clear() {
 	for(size_t i = 0; i < size; i++)
 		delete data[i];
 	delete[] data;
-	capacity = DEFAULT_CAPACITY;
+	capacity = DEFAULT_CAPACITY_CONTAINER;
 	data = new Vehicle*[capacity];
 	size = 0;
 }
@@ -139,7 +139,7 @@ void Container::move(Container&& other)
 }
 
 size_t Container::calculateCapacity(const size_t number) const {
-	size_t result = DEFAULT_CAPACITY;
+	size_t result = DEFAULT_CAPACITY_CONTAINER;
 	while (number > result)
 		result *= 2;
 

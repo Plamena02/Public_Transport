@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Electric Vehicles/Vehicle/Vehicle.h"
-const size_t DEFAULT_CAPACITY = 4;
+const size_t DEFAULT_CAPACITY_CONTAINER = 4;
 
 class Container{
 
