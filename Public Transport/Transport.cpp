@@ -17,8 +17,7 @@ void Transport::menu(){
     MyString command;
     cout << "-> Welcome to Electric Public Transport. <-\n";
     while(true){
-        cout << "Please enter one of the following commands: \n 
-        travel, add, remove, print, exit\n";
+        cout << "Please enter one of the following commands: \n -> travel, add, remove, print, exit\n";
         cout << "Enter command\n> ";
         cin >> command;
 
@@ -39,7 +38,7 @@ void Transport::travel()
     cin >> inCity;
     cout << "Please enter where you are traveling from:\n> ";
     cin >> start;
-    cout >> "Please enter final destination:\n> ";
+    cout << "Please enter final destination:\n> ";
     cin >> end;
     cout << "Enter the distance: \n> ";
     cin >> km;
@@ -80,7 +79,7 @@ void Transport::travel()
 void Transport::print(){
     for(size_t i = 0; i < Transport::vehicles.getSize(); i++)
        {    
-            cout << i + 1 ". ";
+            cout << i + 1 << ". ";
             Transport::vehicles[i] -> display();
             cout << endl;
        }
@@ -89,12 +88,7 @@ void Transport::print(){
 void Transport::add(){
 
     MyString input;
-    cout << "Possible commands:\n \t - driverB - a driver for an electric car;
-    \n \t - driverD - a driver for an electric bus;
-    \n \t - bus - add an electric intercity bus;
-    \n \t - cityBus - an electric city bus;
-    \n \t - car - an electric taxi/car;
-    \n \t - scooter - an electric scooter;";
+    cout << "Possible commands:\n \t - driverB - a driver for an electric car;\n \t - driverD - a driver for an electric bus;\n \t - bus - add an electric intercity bus;\n \t - cityBus - an electric city bus;\n \t - car - an electric taxi/car;\n \t - scooter - an electric scooter;";
     cin >> input;
 
     if(input == "driverB"){
