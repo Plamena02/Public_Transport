@@ -1,4 +1,4 @@
-#include "InterCityBus.h"
+#include "../h/InterCityBus.h"
 
 IntercityBus::IntercityBus() : ElectricBus() {
 	type = Vehicle::ElectricType::E_INTERCITY_BUS;

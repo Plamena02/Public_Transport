@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Transport.h"
-#include "../MyString/MyString.h"
-#include "../Electric Vehicles/InterCityBus.h"
-#include "../Electric Vehicles/ElectricCar.h"
-#include "../Electric Vehicles/ElectricScooter.h"
-#include "../Electric Vehicles/CityBus.h"
+#include "../h/Transport.h"
+#include "../h/MyString.h"
+#include "../h/InterCityBus.h"
+#include "../h/ElectricCar.h"
+#include "../h/ElectricScooter.h"
+#include "../h/CityBus.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "MyString.h"
+#include "../h/MyString.h"
 #include <cstring>
 #include <iostream>
 using namespace std;
