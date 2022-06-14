@@ -1,4 +1,4 @@
-#include "ElectricBus.h"
+#include "../h/ElectricBus.h"
 #include <stdexcept>
 
 using std::cerr;

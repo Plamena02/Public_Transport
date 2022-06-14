@@ -1,4 +1,4 @@
-#include "ElectricCar.h"
+#include "../h/ElectricCar.h"
 
 ElectricCar::ElectricCar() : Vehicle() {
 	type = ElectricType::E_CAR;

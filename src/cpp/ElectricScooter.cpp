@@ -1,4 +1,4 @@
-#include "ElectricScooter.h"
+#include "../h/ElectricScooter.h"
 
 ElectricScooter::ElectricScooter() : Vehicle() {
 	type = ElectricType::E_SCOOTER;
