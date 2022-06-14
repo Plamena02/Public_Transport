@@ -1,11 +1,12 @@
 #pragma once
 #include "ElectricBus.h"
+
 class CityBus : public ElectricBus {
 public:
 	CityBus();
-	CityBus(size_t, size_t, MyString, double, double, double, MyString, MyString, size_t, size_t, size_t, size_t);
-	// Does the bus work at that time or it is at garage
-	bool isItWorkingAt(Time&) const override;
+	CityBus(size_t, size_t, MyString, double, double, MyString, MyString, size_t, size_t, size_t, size_t, size_t);
+
+	bool isItWorkingAt(size_t, size_t) const override;
 
 	MyString getTypeString() const override;
 	ElectricType getType() const override;
@@ -18,4 +19,8 @@ public:
 	bool removeStop(size_t);
 
 	void display() const override;
+
+private:
+	size_t capacity;
+
 };
