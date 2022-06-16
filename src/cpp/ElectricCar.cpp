@@ -4,7 +4,7 @@ ElectricCar::ElectricCar() : Vehicle() {
 	type = ElectricType::E_CAR;
 }
 
-ElectricCar::ElectricCar(size_t DriverIdentityNumber, size_t vehicleID, size_t speed, MyString model, double batteryRange, double chargingRate) :
+ElectricCar::ElectricCar(size_t DriverIdentityNumber, size_t vehicleID, size_t speed, const MyString& model, double batteryRange, double chargingRate) :
 	Vehicle(DriverIdentityNumber, vehicleID, model, batteryRange, chargingRate), speed(speed){
 	type = ElectricType::E_CAR;
 }

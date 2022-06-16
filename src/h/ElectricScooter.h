@@ -6,7 +6,7 @@ class ElectricScooter : public Vehicle {
 	bool isFree;
 public:
 	ElectricScooter();
-	ElectricScooter(size_t, MyString, double, double);
+	ElectricScooter(size_t, const MyString&, double, double);
 
 	void occupy();
 	void free();

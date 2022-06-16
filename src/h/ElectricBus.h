@@ -10,7 +10,7 @@ protected:
 	} startTime, finalTime, breakTime;
 public:
 	ElectricBus();
-	ElectricBus(size_t, size_t, MyString, double, double, MyString, MyString, size_t, size_t, size_t, size_t);
+	ElectricBus(size_t, size_t, const MyString&, double, double, const MyString&, const MyString&, size_t, size_t, size_t, size_t);
 	virtual bool isItWorkingAt(size_t, size_t) const = 0;
 
 	void setTime(size_t, size_t, size_t, size_t);

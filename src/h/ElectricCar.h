@@ -5,7 +5,7 @@ class ElectricCar : public Vehicle { //Electric Taxi car
 
 	public:
 		ElectricCar();
-		ElectricCar(size_t, size_t, size_t, MyString, double, double);
+		ElectricCar(size_t, size_t, size_t, const MyString&, double, double);
 
 		size_t getSpeed() const;
 

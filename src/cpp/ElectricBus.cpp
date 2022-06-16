@@ -7,7 +7,7 @@ ElectricBus::ElectricBus() : Vehicle() {
 	setTime(0, 0, 0, 0);
 }
 
-ElectricBus::ElectricBus(size_t DriverIdentityNumber, size_t vehicleID, MyString model, double batteryRange, double chargingRate, MyString startDestination, MyString finalDestination, size_t sH, size_t sM, size_t fH, size_t fM) :
+ElectricBus::ElectricBus(size_t DriverIdentityNumber, size_t vehicleID, const MyString& model, double batteryRange, double chargingRate, const MyString& startDestination, const MyString& finalDestination, size_t sH, size_t sM, size_t fH, size_t fM) :
 	Vehicle(DriverIdentityNumber, vehicleID, model, batteryRange, chargingRate) {
 	listOfStops.pushBack(startDestination);
 	listOfStops.pushBack(finalDestination);
@@ -40,7 +40,7 @@ bool ElectricBus::removeStop(const MyString &stop){
 }
 
 void ElectricBus::setTime(size_t sHour, size_t sMin, size_t fHour, size_t fMin) {
-	if (!(sHour < 24 && fHour < 24 && sMin < 60 && fMin < 60 && sHour * 60 + sMin > fHour * 60 + fMin)) throw std::invalid_argument("Invalid time period");
+	if (!(sHour < 24 && fHour < 24 && sMin < 60 && fMin < 60 && sHour * 60 + sMin < fHour * 60 + fMin)) throw std::invalid_argument("Invalid time period");
 	startTime.hour = sHour;
 	startTime.minutes = sMin;
 	finalTime.hour = fHour;
